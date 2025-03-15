@@ -26,6 +26,10 @@ type Mutation {
     deleteFeedback(id: ID): [Feedback!]
 }
 
+type Subscription {
+    feedbackPosted: Feedback
+}
+
 input AddFeedbackInput {
     author: String!
     content: String!

@@ -2,6 +2,9 @@ import db from './data/db.js'
 import { generateID } from './helpers.js'
 import { EventArgs, Event } from './types/event.js'
 import { Feedback, FeedbackArgs } from './types/feedback.js'
+import { PubSub } from 'graphql-subscriptions'
+
+const pubsub = new PubSub()
 
 const resolvers = {
   Query: {
@@ -20,18 +23,22 @@ const resolvers = {
   },
   Mutation: {
     addFeedback(parent: undefined, args: { feedback: Feedback }) {
-      // console.log(args)
       const newFb = {
         ...args.feedback,
         id: generateID(),
       }
-      // console.log(newFb)
       db.feedbacks.push(newFb)
+      pubsub.publish('FEEDBACK_POSTED', { feedbackPosted: newFb })
       return newFb
     },
     deleteFeedback(parent: undefined, args: FeedbackArgs) {
       db.feedbacks = db.feedbacks.filter((fb) => fb.id !== args.id)
       return db.feedbacks
+    },
+  },
+  Subscription: {
+    feedbackPosted: {
+      subscribe: () => pubsub.asyncIterableIterator(['FEEDBACK_POSTED']),
     },
   },
   Event: {
