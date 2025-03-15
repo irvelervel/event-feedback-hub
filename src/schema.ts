@@ -20,6 +20,18 @@ type Query {
     events: [Event]
     event(id: ID): Event
 }
+
+type Mutation {
+    addFeedback(feedback: AddFeedbackInput!): Feedback
+    deleteFeedback(id: ID): [Feedback!]
+}
+
+input AddFeedbackInput {
+    author: String!
+    content: String!
+    rating: Int!
+    event_id: String!
+}
 `
 
 export default typeDefs
