@@ -1,5 +1,6 @@
 export type FeedbackArgs = {
   id: string
+  rating: number
 }
 
 export type Feedback = {

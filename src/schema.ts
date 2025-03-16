@@ -18,7 +18,7 @@ type Query {
     event(id: ID): Event
     events: [Event]
     feedbacks: [Feedback]
-    feedbacksForEvent(id: ID): [Feedback]
+    feedbacksForEvent(rating: Int, id: ID): [Feedback]
 }
 
 type Mutation {

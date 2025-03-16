@@ -21,9 +21,11 @@ const resolvers = {
     },
     feedbacksForEvent(parent: undefined, args: FeedbackArgs) {
       if (args.id) {
-        return db.feedbacks.filter((fb) => fb.event_id === args.id)
+        return db.feedbacks.filter(
+          (fb) => fb.rating >= args.rating && fb.event_id === args.id
+        )
       } else {
-        return db.feedbacks
+        return db.feedbacks.filter((fb) => fb.rating >= args.rating)
       }
     },
   },
