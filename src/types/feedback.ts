@@ -9,4 +9,5 @@ export type Feedback = {
   content: string
   rating: number
   event_id: string
+  timestamp: number
 }

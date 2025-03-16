@@ -6,6 +6,7 @@ type Feedback {
     content: String!
     rating: Int!
     event: Event!
+    timestamp: Int!
 }
 
 type Event {
@@ -35,6 +36,7 @@ input AddFeedbackInput {
     content: String!
     rating: Int!
     event_id: String!
+    timestamp: Int!
 }
 `
 
