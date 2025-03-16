@@ -16,9 +16,10 @@ type Event {
 
 type Query {
     feedbacks: [Feedback]
-    feedback(id: ID): Feedback
+    # feedback(id: ID): Feedback
     events: [Event]
     event(id: ID): Event
+    feedbacksForEvent(id: ID): [Feedback]
 }
 
 type Mutation {

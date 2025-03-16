@@ -17,8 +17,15 @@ const resolvers = {
     feedbacks() {
       return db.feedbacks
     },
-    feedback(parent: undefined, args: FeedbackArgs) {
-      return db.feedbacks.find((fb) => fb.id === args.id)
+    // feedback(parent: undefined, args: FeedbackArgs) {
+    //   return db.feedbacks.find((fb) => fb.id === args.id)
+    // },
+    feedbacksForEvent(parent: undefined, args: FeedbackArgs) {
+      if (args.id) {
+        return db.feedbacks.filter((fb) => fb.event_id === args.id)
+      } else {
+        return db.feedbacks
+      }
     },
   },
   Mutation: {
