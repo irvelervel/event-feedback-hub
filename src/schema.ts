@@ -15,10 +15,9 @@ type Event {
 }
 
 type Query {
-    feedbacks: [Feedback]
-    # feedback(id: ID): Feedback
-    events: [Event]
     event(id: ID): Event
+    events: [Event]
+    feedbacks: [Feedback]
     feedbacksForEvent(id: ID): [Feedback]
 }
 

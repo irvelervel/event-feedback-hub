@@ -1,3 +1,5 @@
+// mock data
+
 let db = {
   events: [
     {

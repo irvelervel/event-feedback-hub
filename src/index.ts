@@ -11,18 +11,23 @@ import typeDefs from './schema.js'
 import resolvers from './resolvers.js'
 // having troubles with the latest version of @types/ws, I had to pinpoint down a previous version in package.json
 
+// creating the express application
 const app = express()
 const httpServer = createServer(app)
 
+// creates the schema from typeFeds and resolvers
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 
+// sets up the websocket server for enabling subscriptions notifications
 const wsServer = new WebSocketServer({
   server: httpServer,
   path: '/graphql',
 })
 
+// sets up graceful shutdown operations
 const serverCleanup = useServer({ schema }, wsServer)
 
+// creates the Apollo Server
 const server = new ApolloServer({
   schema,
   plugins: [
@@ -39,8 +44,10 @@ const server = new ApolloServer({
   ],
 })
 
+// starts Apollo
 await server.start()
 
+// enables express core features
 app.use(
   '/graphql',
   cors<cors.CorsRequest>(),
@@ -48,7 +55,7 @@ app.use(
   expressMiddleware(server)
 )
 
-// reads a PORT environment variable set in an .env file
+// starts express, reading a PORT environment variable set in an .env file
 httpServer.listen(process.env.PORT, () => {
   console.log(
     `Server is now running on http://localhost:${process.env.PORT}/graphql`
