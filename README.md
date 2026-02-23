@@ -33,9 +33,10 @@ npm install
 
 ### Environment Variables
 
-You need one env var to get this started:
+You need a couple of env vara to get this started:
 
 ```bash
+URL
 PORT
 ```
 
@@ -56,4 +57,4 @@ Start the development server:
 npm run dev
 ```
 
-The server will be available at `http://localhost:${PORT}/graphql`, and browsing this URL will load the Apollo Sandbox.
+The server will be available at `http://${URL}:${PORT}/graphql`, and browsing this URL will load the Apollo Sandbox.
