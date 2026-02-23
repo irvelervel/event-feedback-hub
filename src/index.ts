@@ -52,12 +52,12 @@ app.use(
   '/graphql',
   cors<cors.CorsRequest>(),
   express.json(),
-  expressMiddleware(server)
+  expressMiddleware(server),
 )
 
 // starts express, reading a PORT environment variable set in an .env file
 httpServer.listen(process.env.PORT, () => {
   console.log(
-    `Server is now running on http://localhost:${process.env.PORT}/graphql`
+    `Server is now running on ${process.env.URL}:${process.env.PORT}/graphql`,
   )
 })
